@@ -32,13 +32,12 @@ public class Doctor {
     private LocalDate dateOfBirth;
 
     @Column(name = "is_teacher")
-    private boolean isATeacher;
+    private boolean isTeacher;
 
     public Doctor() {
     }
 
-    public Doctor(Long id, String name, String surname, Long licenseNumber) {
-        this.id = id;
+    public Doctor(String name, String surname, Long licenseNumber) {
         this.name = name;
         this.surname = surname;
         this.licenseNumber = licenseNumber;
@@ -124,11 +123,11 @@ public class Doctor {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public boolean isATeacher() {
-        return isATeacher;
+    public boolean isTeacher() {
+        return isTeacher;
     }
 
-    public void setATeacher(boolean ATeacher) {
-        isATeacher = ATeacher;
+    public void setTeacher(boolean teacher) {
+        isTeacher = teacher;
     }
 }
