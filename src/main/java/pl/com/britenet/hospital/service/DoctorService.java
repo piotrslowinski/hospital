@@ -1,0 +1,17 @@
+package pl.com.britenet.hospital.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import pl.com.britenet.hospital.repository.DoctorRepository;
+
+@Service
+public class DoctorService {
+
+    private final DoctorRepository doctorRepository;
+
+    @Autowired
+    public DoctorService(DoctorRepository doctorRepository) {
+        this.doctorRepository = doctorRepository;
+    }
+
+}
