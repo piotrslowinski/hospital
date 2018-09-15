@@ -3,7 +3,6 @@ package pl.com.britenet.hospital.controller;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import pl.com.britenet.hospital.domain.DoctorAssignment;
 import pl.com.britenet.hospital.domain.Hospital;
 import pl.com.britenet.hospital.dto.HospitalDto;
 import pl.com.britenet.hospital.service.HospitalService;
@@ -87,7 +86,8 @@ public class HospitalController {
             this.hospitalService.assignNewDoctor(hospitalId, doctorId);
         } catch (NoSuchElementException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
         }
         return new ResponseEntity("success", HttpStatus.OK);
@@ -97,9 +97,11 @@ public class HospitalController {
     public ResponseEntity<String> unassignDoctorFromHospital(@PathVariable Long hospitalId, @PathVariable Long doctorId) {
         try {
             this.hospitalService.unassignTheDoctorFromHospital(hospitalId, doctorId);
-        } catch (NoSuchElementException e) {
+        }
+        catch (NoSuchElementException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
         }
         return new ResponseEntity("success", HttpStatus.OK);

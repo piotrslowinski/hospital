@@ -1,11 +1,10 @@
 package pl.com.britenet.hospital.dto;
 
-import pl.com.britenet.hospital.domain.DoctorAssignment;
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 import pl.com.britenet.hospital.domain.Hospital;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.stream.Collectors;
 
 public class HospitalDto {
 
@@ -49,7 +48,7 @@ public class HospitalDto {
     }
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -57,7 +56,7 @@ public class HospitalDto {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -65,7 +64,7 @@ public class HospitalDto {
     }
 
     public String getCountry() {
-        return country;
+        return this.country;
     }
 
     public void setCountry(String country) {
@@ -73,7 +72,7 @@ public class HospitalDto {
     }
 
     public String getTown() {
-        return town;
+        return this.town;
     }
 
     public void setTown(String town) {
@@ -81,7 +80,7 @@ public class HospitalDto {
     }
 
     public String getStreet() {
-        return street;
+        return this.street;
     }
 
     public void setStreet(String street) {
@@ -89,7 +88,7 @@ public class HospitalDto {
     }
 
     public String getPostalCode() {
-        return postalCode;
+        return this.postalCode;
     }
 
     public void setPostalCode(String postalCode) {
@@ -97,7 +96,7 @@ public class HospitalDto {
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return this.phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -105,7 +104,7 @@ public class HospitalDto {
     }
 
     public String getFaxNumber() {
-        return faxNumber;
+        return this.faxNumber;
     }
 
     public void setFaxNumber(String faxNumber) {
@@ -113,7 +112,7 @@ public class HospitalDto {
     }
 
     public int getNumberOfAmbulances() {
-        return numberOfAmbulances;
+        return this.numberOfAmbulances;
     }
 
     public void setNumberOfAmbulances(int numberOfAmbulances) {
@@ -121,7 +120,7 @@ public class HospitalDto {
     }
 
     public boolean isHelicopterAccess() {
-        return helicopterAccess;
+        return this.helicopterAccess;
     }
 
     public void setHelicopterAccess(boolean helicopterAccess) {
@@ -129,7 +128,7 @@ public class HospitalDto {
     }
 
     public boolean isTeachingHospital() {
-        return teachingHospital;
+        return this.teachingHospital;
     }
 
     public void setTeachingHospital(boolean teachingHospital) {
@@ -137,7 +136,7 @@ public class HospitalDto {
     }
 
     public Collection<DoctorDto> getDoctors() {
-        return doctors;
+        return this.doctors;
     }
 
     public void setDoctors(Collection<DoctorDto> doctors) {

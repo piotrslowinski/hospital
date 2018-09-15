@@ -1,6 +1,9 @@
 package pl.com.britenet.hospital.dto;
 
+import java.time.LocalDate;
+
 import pl.com.britenet.hospital.domain.DoctorAssignment;
+
 
 public class DoctorDto {
 
@@ -12,15 +15,21 @@ public class DoctorDto {
 
     private String title;
 
+    private LocalDate contractStartDate;
+
+    private LocalDate contractEndDate;
+
     public DoctorDto(DoctorAssignment assignment) {
         this.id = assignment.getDoctor().getId();
         this.name = assignment.getDoctor().getName();
         this.surname = assignment.getDoctor().getSurname();
         this.title = assignment.getDoctor().getTitle();
+        this.contractStartDate = assignment.getContractStartDate();
+        this.contractEndDate = assignment.getContractEndDate();
     }
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -28,7 +37,7 @@ public class DoctorDto {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -36,7 +45,7 @@ public class DoctorDto {
     }
 
     public String getSurname() {
-        return surname;
+        return this.surname;
     }
 
     public void setSurname(String surname) {
@@ -44,10 +53,26 @@ public class DoctorDto {
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public LocalDate getContractStartDate() {
+        return this.contractStartDate;
+    }
+
+    public void setContractStartDate(LocalDate contractStartDate) {
+        this.contractStartDate = contractStartDate;
+    }
+
+    public LocalDate getContractEndDate() {
+        return this.contractEndDate;
+    }
+
+    public void setContractEndDate(LocalDate contractEndDate) {
+        this.contractEndDate = contractEndDate;
     }
 }

@@ -1,7 +1,8 @@
 package pl.com.britenet.hospital.domain;
 
-import javax.persistence.*;
 import java.time.LocalDate;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "hospital_doctors")

@@ -1,10 +1,11 @@
 package pl.com.britenet.hospital.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
 import java.util.Collection;
 import java.util.LinkedList;
+
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "hospitals")
@@ -51,6 +52,20 @@ public class Hospital {
         this.name = name;
         this.country = country;
         this.town = town;
+    }
+
+    public Hospital(String name, String country, String town, String street, String postalCode, String phoneNumber,
+                    String faxNumber, int numberOfAmbulances, boolean helicopterAccess, boolean teachingHospital) {
+        this.name = name;
+        this.country = country;
+        this.town = town;
+        this.street = street;
+        this.postalCode = postalCode;
+        this.phoneNumber = phoneNumber;
+        this.faxNumber = faxNumber;
+        this.numberOfAmbulances = numberOfAmbulances;
+        this.helicopterAccess = helicopterAccess;
+        this.teachingHospital = teachingHospital;
     }
 
     public Long getId() {
