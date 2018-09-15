@@ -1,13 +1,14 @@
 package pl.com.britenet.hospital.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import pl.com.britenet.hospital.domain.Doctor;
-import pl.com.britenet.hospital.repository.DoctorRepository;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+
+import pl.com.britenet.hospital.domain.Doctor;
+import pl.com.britenet.hospital.repository.DoctorRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class DoctorService {
@@ -64,5 +65,13 @@ public class DoctorService {
             throw new NoSuchElementException("repository is empty");
         }
         return doctors;
+    }
+
+    public void deleteDoctor(Long doctorId) {
+        Optional<Doctor> doctorOptional = findDoctorById(doctorId);
+        if (!doctorOptional.isPresent()) {
+            throw new NoSuchElementException("doctor with this id doesn't exist");
+        }
+        this.doctorRepository.delete(doctorOptional.get());
     }
 }
