@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 
 import pl.com.britenet.hospital.domain.DoctorAssignment;
 import pl.com.britenet.hospital.domain.Hospital;
+import pl.com.britenet.hospital.dto.HospitalDto;
 import pl.com.britenet.hospital.service.HospitalService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,14 +48,16 @@ public class HospitalController {
     }
 
     @GetMapping("/{hospitalId}")
-    public ResponseEntity<Hospital> getHospitalById(@PathVariable Long hospitalId) {
+    public ResponseEntity<HospitalDto> getHospitalById(@PathVariable Long hospitalId) {
+        HospitalDto hospitalDto;
         Hospital hospital;
         try {
             hospital = this.hospitalService.findHospitalById(hospitalId).get();
         } catch (NoSuchElementException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity(hospital, HttpStatus.OK);
+        hospitalDto = new HospitalDto(hospital);
+        return new ResponseEntity(hospitalDto, HttpStatus.OK);
     }
 
     @GetMapping
