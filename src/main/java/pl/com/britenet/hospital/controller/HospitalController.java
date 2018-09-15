@@ -3,6 +3,7 @@ package pl.com.britenet.hospital.controller;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import pl.com.britenet.hospital.domain.DoctorAssignment;
 import pl.com.britenet.hospital.domain.Hospital;
 import pl.com.britenet.hospital.service.HospitalService;
 
@@ -75,5 +76,29 @@ public class HospitalController {
             return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity("hospital deleted", HttpStatus.OK);
+    }
+
+    @PutMapping("/{hospitalId}/doctor/{doctorId}")
+    public ResponseEntity<String> assignDoctorToHospital(@PathVariable Long hospitalId, @PathVariable Long doctorId) {
+        try {
+            this.hospitalService.assignNewDoctor(hospitalId, doctorId);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+        return new ResponseEntity("success", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{hospitalId}/doctor/{doctorId}")
+    public ResponseEntity<String> unassignDoctorFromHospital(@PathVariable Long hospitalId, @PathVariable Long doctorId) {
+        try {
+            this.hospitalService.unassignTheDoctorFromHospital(hospitalId, doctorId);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+        return new ResponseEntity("success", HttpStatus.OK);
     }
 }

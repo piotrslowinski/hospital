@@ -1,6 +1,10 @@
 package pl.com.britenet.hospital.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.LinkedList;
 
 @Entity
 @Table(name = "hospitals")
@@ -35,6 +39,10 @@ public class Hospital {
 
     @Column(name = "teaching_hospital")
     private boolean teachingHospital;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "hospital_id")
+    private Collection<DoctorAssignment> doctorAssignments = new LinkedList<>();
 
     public Hospital() {
     }
@@ -131,5 +139,14 @@ public class Hospital {
 
     public void setTeachingHospital(boolean teachingHospital) {
         this.teachingHospital = teachingHospital;
+    }
+
+    @JsonIgnore
+    public Collection<DoctorAssignment> getDoctorAssignments() {
+        return this.doctorAssignments;
+    }
+
+    public void setDoctorAssignments(Collection<DoctorAssignment> doctorAssignments) {
+        this.doctorAssignments = doctorAssignments;
     }
 }
