@@ -1,11 +1,15 @@
 package pl.com.britenet.hospital.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 import pl.com.britenet.hospital.domain.Hospital;
 import pl.com.britenet.hospital.repository.HospitalRepository;
 
-import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 
 @Service
 public class HospitalService {
@@ -37,5 +41,26 @@ public class HospitalService {
 
     private void saveHospital(Hospital hospital) {
         this.hospitalRepository.save(hospital);
+    }
+
+    public Hospital updateHospital(Long hospitalId, Hospital hospital) {
+        Optional<Hospital> hospitalOptional = findHospitalById(hospitalId);
+        if (!hospitalOptional.isPresent()) {
+            throw new NoSuchElementException("hospital with this id doesn't exist");
+        }
+        Hospital hospitalToUpdate = hospitalOptional.get();
+        hospitalToUpdate.setName(hospital.getName());
+        hospitalToUpdate.setPhoneNumber(hospital.getPhoneNumber());
+        hospitalToUpdate.setNumberOfAmbulances(hospital.getNumberOfAmbulances());
+        saveHospital(hospitalToUpdate);
+        return hospitalToUpdate;
+    }
+
+    public Optional<Hospital> findHospitalById(Long hospitalId) {
+        return this.hospitalRepository.findById(hospitalId);
+    }
+
+    public List<Hospital> getAllHospitals() {
+        return this.hospitalRepository.findAll();
     }
 }

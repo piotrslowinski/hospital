@@ -46,7 +46,7 @@ public class Hospital {
     }
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -54,7 +54,7 @@ public class Hospital {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -62,7 +62,7 @@ public class Hospital {
     }
 
     public String getCountry() {
-        return country;
+        return this.country;
     }
 
     public void setCountry(String country) {
@@ -70,7 +70,7 @@ public class Hospital {
     }
 
     public String getTown() {
-        return town;
+        return this.town;
     }
 
     public void setTown(String town) {
@@ -78,7 +78,7 @@ public class Hospital {
     }
 
     public String getStreet() {
-        return street;
+        return this.street;
     }
 
     public void setStreet(String street) {
@@ -86,7 +86,7 @@ public class Hospital {
     }
 
     public String getPostalCode() {
-        return postalCode;
+        return this.postalCode;
     }
 
     public void setPostalCode(String postalCode) {
@@ -94,7 +94,7 @@ public class Hospital {
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return this.phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -102,7 +102,7 @@ public class Hospital {
     }
 
     public String getFaxNumber() {
-        return faxNumber;
+        return this.faxNumber;
     }
 
     public void setFaxNumber(String faxNumber) {
@@ -110,7 +110,7 @@ public class Hospital {
     }
 
     public int getNumberOfAmbulances() {
-        return numberOfAmbulances;
+        return this.numberOfAmbulances;
     }
 
     public void setNumberOfAmbulances(int numberOfAmbulances) {
@@ -118,7 +118,7 @@ public class Hospital {
     }
 
     public boolean isHelicopterAccess() {
-        return helicopterAccess;
+        return this.helicopterAccess;
     }
 
     public void setHelicopterAccess(boolean helicopterAccess) {
@@ -126,7 +126,7 @@ public class Hospital {
     }
 
     public boolean isTeachingHospital() {
-        return teachingHospital;
+        return this.teachingHospital;
     }
 
     public void setTeachingHospital(boolean teachingHospital) {
