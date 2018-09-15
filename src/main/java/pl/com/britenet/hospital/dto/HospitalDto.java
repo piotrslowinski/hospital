@@ -1,18 +1,13 @@
-package pl.com.britenet.hospital.domain;
+package pl.com.britenet.hospital.dto;
 
 import java.util.Collection;
-import java.util.LinkedList;
+import java.util.stream.Collectors;
 
-import javax.persistence.*;
+import pl.com.britenet.hospital.domain.Hospital;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
-@Table(name = "hospitals")
-public class Hospital {
+public class HospitalDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -23,49 +18,33 @@ public class Hospital {
 
     private String street;
 
-    @Column(name = "postal_code")
     private String postalCode;
 
-    @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "fax_number")
     private String faxNumber;
 
-    @Column(name = "number_of_ambulances")
     private int numberOfAmbulances;
 
-    @Column(name = "helicopter_access")
     private boolean helicopterAccess;
 
-    @Column(name = "teaching_hospital")
     private boolean teachingHospital;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "hospital_id")
-    private Collection<DoctorAssignment> doctorAssignments = new LinkedList<>();
+    private Collection<DoctorDto> doctors;
 
-    public Hospital() {
-    }
-
-    public Hospital(String name, String country, String town) {
-        this.name = name;
-        this.country = country;
-        this.town = town;
-    }
-
-    public Hospital(String name, String country, String town, String street, String postalCode, String phoneNumber,
-                    String faxNumber, int numberOfAmbulances, boolean helicopterAccess, boolean teachingHospital) {
-        this.name = name;
-        this.country = country;
-        this.town = town;
-        this.street = street;
-        this.postalCode = postalCode;
-        this.phoneNumber = phoneNumber;
-        this.faxNumber = faxNumber;
-        this.numberOfAmbulances = numberOfAmbulances;
-        this.helicopterAccess = helicopterAccess;
-        this.teachingHospital = teachingHospital;
+    public HospitalDto(Hospital hospital) {
+        this.id = hospital.getId();
+        this.name = hospital.getName();
+        this.country = hospital.getCountry();
+        this.town = hospital.getTown();
+        this.street = hospital.getStreet();
+        this.postalCode = hospital.getPostalCode();
+        this.phoneNumber = hospital.getPhoneNumber();
+        this.faxNumber = hospital.getFaxNumber();
+        this.numberOfAmbulances = hospital.getNumberOfAmbulances();
+        this.helicopterAccess = hospital.isHelicopterAccess();
+        this.teachingHospital = hospital.isTeachingHospital();
+        this.doctors = hospital.getDoctorAssignments().stream().map(DoctorDto::new).collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -156,12 +135,11 @@ public class Hospital {
         this.teachingHospital = teachingHospital;
     }
 
-    @JsonIgnore
-    public Collection<DoctorAssignment> getDoctorAssignments() {
-        return this.doctorAssignments;
+    public Collection<DoctorDto> getDoctors() {
+        return this.doctors;
     }
 
-    public void setDoctorAssignments(Collection<DoctorAssignment> doctorAssignments) {
-        this.doctorAssignments = doctorAssignments;
+    public void setDoctors(Collection<DoctorDto> doctors) {
+        this.doctors = doctors;
     }
 }

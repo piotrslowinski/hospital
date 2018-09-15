@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import pl.com.britenet.hospital.domain.Hospital;
+import pl.com.britenet.hospital.dto.HospitalDto;
 import pl.com.britenet.hospital.service.HospitalService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,14 +47,16 @@ public class HospitalController {
     }
 
     @GetMapping("/{hospitalId}")
-    public ResponseEntity<Hospital> getHospitalById(@PathVariable Long hospitalId) {
+    public ResponseEntity<HospitalDto> getHospitalById(@PathVariable Long hospitalId) {
+        HospitalDto hospitalDto;
         Hospital hospital;
         try {
             hospital = this.hospitalService.findHospitalById(hospitalId).get();
         } catch (NoSuchElementException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity(hospital, HttpStatus.OK);
+        hospitalDto = new HospitalDto(hospital);
+        return new ResponseEntity(hospitalDto, HttpStatus.OK);
     }
 
     @GetMapping
@@ -75,5 +78,32 @@ public class HospitalController {
             return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity("hospital deleted", HttpStatus.OK);
+    }
+
+    @PutMapping("/{hospitalId}/doctor/{doctorId}")
+    public ResponseEntity<String> assignDoctorToHospital(@PathVariable Long hospitalId, @PathVariable Long doctorId) {
+        try {
+            this.hospitalService.assignNewDoctor(hospitalId, doctorId);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        catch (IllegalArgumentException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+        return new ResponseEntity("success", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{hospitalId}/doctor/{doctorId}")
+    public ResponseEntity<String> unassignDoctorFromHospital(@PathVariable Long hospitalId, @PathVariable Long doctorId) {
+        try {
+            this.hospitalService.unassignTheDoctorFromHospital(hospitalId, doctorId);
+        }
+        catch (NoSuchElementException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        catch (IllegalArgumentException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+        return new ResponseEntity("success", HttpStatus.OK);
     }
 }

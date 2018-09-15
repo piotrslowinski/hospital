@@ -44,6 +44,20 @@ public class Doctor {
         this.licenseNumber = licenseNumber;
     }
 
+    public Doctor(String name, String surname, String title, Long licenseNumber, String phone, String email,
+                  String nationality, String speciality, LocalDate dateOfBirth, boolean teacher) {
+        this.name = name;
+        this.surname = surname;
+        this.title = title;
+        this.licenseNumber = licenseNumber;
+        this.phone = phone;
+        this.email = email;
+        this.nationality = nationality;
+        this.speciality = speciality;
+        this.dateOfBirth = dateOfBirth;
+        this.isTeacher = teacher;
+    }
+
     public Long getId() {
         return this.id;
     }
