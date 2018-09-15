@@ -50,8 +50,6 @@ public class HospitalService {
         }
         Hospital hospitalToUpdate = hospitalOptional.get();
         hospitalToUpdate.setName(hospital.getName());
-        hospitalToUpdate.setPhoneNumber(hospital.getPhoneNumber());
-        hospitalToUpdate.setNumberOfAmbulances(hospital.getNumberOfAmbulances());
         saveHospital(hospitalToUpdate);
         return hospitalToUpdate;
     }
@@ -62,5 +60,13 @@ public class HospitalService {
 
     public List<Hospital> getAllHospitals() {
         return this.hospitalRepository.findAll();
+    }
+
+    public void deleteHospital(Long hospitalId) {
+        Optional<Hospital> hospitalOptional = findHospitalById(hospitalId);
+        if (!hospitalOptional.isPresent()) {
+            throw new NoSuchElementException("hospital with this id doesn't exist");
+        }
+        this.hospitalRepository.delete(hospitalOptional.get());
     }
 }

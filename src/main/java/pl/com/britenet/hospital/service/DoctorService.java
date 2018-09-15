@@ -66,4 +66,12 @@ public class DoctorService {
         }
         return doctors;
     }
+
+    public void deleteDoctor(Long doctorId) {
+        Optional<Doctor> doctorOptional = findDoctorById(doctorId);
+        if (!doctorOptional.isPresent()) {
+            throw new NoSuchElementException("doctor with this id doesn't exist");
+        }
+        this.doctorRepository.delete(doctorOptional.get());
+    }
 }

@@ -34,7 +34,7 @@ public class HospitalController {
         return new ResponseEntity(newHospital, HttpStatus.OK);
     }
 
-    @PostMapping("/{hospitalId}")
+    @PutMapping("/{hospitalId}")
     public ResponseEntity<Hospital> updateHospital(@PathVariable Long hospitalId, @RequestBody Hospital hospital) {
         Hospital updatedHospital = null;
         try {
@@ -65,5 +65,15 @@ public class HospitalController {
             return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity(hospitals, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteHospital(@PathVariable Long id) {
+        try {
+            this.hospitalService.deleteHospital(id);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity("hospital deleted", HttpStatus.OK);
     }
 }

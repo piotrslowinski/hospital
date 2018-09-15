@@ -65,4 +65,14 @@ public class DoctorController {
         }
         return new ResponseEntity(doctors, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteDoctor(@PathVariable Long id) {
+        try {
+            this.doctorService.deleteDoctor(id);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity("doctor deleted", HttpStatus.OK);
+    }
 }
