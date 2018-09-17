@@ -68,7 +68,32 @@ public class HospitalService {
 
     public Hospital updateHospital(Long hospitalId, Hospital hospital) {
         Hospital hospitalToUpdate = findHospitalById(hospitalId).get();
-        hospitalToUpdate.setName(hospital.getName());
+        if (!(hospital.getName() == null)) {
+            hospitalToUpdate.setName(hospital.getName());
+        }
+        if (!(hospital.getCountry() == null)) {
+            hospitalToUpdate.setCountry(hospital.getCountry());
+        }
+        if (!(hospital.getTown() == null)) {
+            hospitalToUpdate.setTown(hospital.getTown());
+        }
+        if (!(hospital.getStreet() == null)) {
+            hospitalToUpdate.setStreet(hospital.getStreet());
+        }
+        if (!(hospital.getPostalCode() == null)) {
+            hospitalToUpdate.setPostalCode(hospital.getPostalCode());
+        }
+        if (!(hospital.getPhoneNumber() == null)) {
+            hospitalToUpdate.setPhoneNumber(hospital.getPhoneNumber());
+        }
+        if (!(hospital.getFaxNumber() == null)) {
+            hospitalToUpdate.setFaxNumber(hospital.getFaxNumber());
+        }
+        if (!(hospital.getNumberOfAmbulances() == 0)) {
+            hospitalToUpdate.setNumberOfAmbulances(hospital.getNumberOfAmbulances());
+        }
+        hospitalToUpdate.setHelicopterAccess(hospital.isHelicopterAccess());
+        hospitalToUpdate.setTeachingHospital(hospital.isTeachingHospital());
         saveHospital(hospitalToUpdate);
         return hospitalToUpdate;
     }
@@ -106,7 +131,7 @@ public class HospitalService {
     public Optional<Doctor> findDoctorById(Long doctorId) {
         Optional<Doctor> doctorOptional = this.doctorRepository.findById(doctorId);
         if (!doctorOptional.isPresent()) {
-            throw new NoSuchElementException("hospital with this id doesn't exist");
+            throw new NoSuchElementException("doctor with this id doesn't exist");
         }
         return doctorOptional;
     }
@@ -136,7 +161,7 @@ public class HospitalService {
     private Optional<DoctorAssignment> getCurrentAssignments(Hospital hospital, Doctor doctor) {
         return hospital.getDoctorAssignments().stream()
                 .filter((a) -> a.getDoctor()
-                .equals(doctor)).filter((assignment -> isAssignmentCurrent(assignment))).findFirst();
+                        .equals(doctor)).filter((assignment -> isAssignmentCurrent(assignment))).findFirst();
     }
 
     private boolean isAssignmentCurrent(DoctorAssignment assignment) {
