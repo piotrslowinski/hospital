@@ -1,7 +1,8 @@
 package pl.com.britenet.hospital.domain;
 
-import javax.persistence.*;
 import java.time.LocalDate;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "doctors")
@@ -43,8 +44,22 @@ public class Doctor {
         this.licenseNumber = licenseNumber;
     }
 
+    public Doctor(String name, String surname, String title, Long licenseNumber, String phone, String email,
+                  String nationality, String speciality, LocalDate dateOfBirth, boolean teacher) {
+        this.name = name;
+        this.surname = surname;
+        this.title = title;
+        this.licenseNumber = licenseNumber;
+        this.phone = phone;
+        this.email = email;
+        this.nationality = nationality;
+        this.speciality = speciality;
+        this.dateOfBirth = dateOfBirth;
+        this.isTeacher = teacher;
+    }
+
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -52,7 +67,7 @@ public class Doctor {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -60,7 +75,7 @@ public class Doctor {
     }
 
     public String getSurname() {
-        return surname;
+        return this.surname;
     }
 
     public void setSurname(String surname) {
@@ -68,7 +83,7 @@ public class Doctor {
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public void setTitle(String title) {
@@ -76,7 +91,7 @@ public class Doctor {
     }
 
     public Long getLicenseNumber() {
-        return licenseNumber;
+        return this.licenseNumber;
     }
 
     public void setLicenseNumber(Long licenseNumber) {
@@ -84,7 +99,7 @@ public class Doctor {
     }
 
     public String getPhone() {
-        return phone;
+        return this.phone;
     }
 
     public void setPhone(String phone) {
@@ -92,7 +107,7 @@ public class Doctor {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -100,7 +115,7 @@ public class Doctor {
     }
 
     public String getNationality() {
-        return nationality;
+        return this.nationality;
     }
 
     public void setNationality(String nationality) {
@@ -108,7 +123,7 @@ public class Doctor {
     }
 
     public String getSpeciality() {
-        return speciality;
+        return this.speciality;
     }
 
     public void setSpeciality(String speciality) {
@@ -116,7 +131,7 @@ public class Doctor {
     }
 
     public LocalDate getDateOfBirth() {
-        return dateOfBirth;
+        return this.dateOfBirth;
     }
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
@@ -124,10 +139,10 @@ public class Doctor {
     }
 
     public boolean isTeacher() {
-        return isTeacher;
+        return this.isTeacher;
     }
 
     public void setTeacher(boolean teacher) {
-        isTeacher = teacher;
+        this.isTeacher = teacher;
     }
 }

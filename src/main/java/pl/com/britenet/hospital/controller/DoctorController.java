@@ -1,16 +1,15 @@
 package pl.com.britenet.hospital.controller;
 
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import pl.com.britenet.hospital.domain.Doctor;
+import pl.com.britenet.hospital.service.DoctorService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.com.britenet.hospital.domain.Doctor;
-import pl.com.britenet.hospital.service.DoctorService;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-
 
 @RestController
 @RequestMapping("/doctors")
@@ -65,5 +64,15 @@ public class DoctorController {
             return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity(doctors, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteDoctor(@PathVariable Long id) {
+        try {
+            this.doctorService.deleteDoctor(id);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity("doctor deleted", HttpStatus.OK);
     }
 }
